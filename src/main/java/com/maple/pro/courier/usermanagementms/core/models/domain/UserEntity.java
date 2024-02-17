@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Document(value = "user")
@@ -17,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Data
-public class User {
+public class UserEntity {
 
     @Id
     private String userId;
@@ -27,17 +26,14 @@ public class User {
 
     private String passwordHash;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Indexed
-    private OffsetDateTime createdAt;
+    private Date createdAt;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Indexed
-    private OffsetDateTime updatedAt;
+    private Date updatedAt;
 
     @Indexed
     private String mobileNumber;
-
 
     private List<Address> addresses;
 
@@ -51,8 +47,7 @@ public class User {
 
     private Boolean emailVerified;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private OffsetDateTime lastLogin;
+    private Date lastLogin;
 
     private Integer loginAttempts;
 

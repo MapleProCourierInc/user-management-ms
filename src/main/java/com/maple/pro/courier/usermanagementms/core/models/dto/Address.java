@@ -20,7 +20,7 @@ public class Address {
 
   private String streetName;
 
-  private JsonNullable<String> unit = JsonNullable.<String>undefined();
+  private String unit ;
 
   private String city;
 
@@ -87,7 +87,7 @@ public class Address {
   }
 
   public Address unit(String unit) {
-    this.unit = JsonNullable.of(unit);
+    this.unit = unit;
     return this;
   }
 
@@ -98,11 +98,11 @@ public class Address {
   
   @Schema(name = "unit", example = "Unit 2", description = "Apartment or unit number, if applicable.", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("unit")
-  public JsonNullable<String> getUnit() {
+  public String getUnit() {
     return unit;
   }
 
-  public void setUnit(JsonNullable<String> unit) {
+  public void setUnit(String unit) {
     this.unit = unit;
   }
 
@@ -197,7 +197,7 @@ public class Address {
     Address address = (Address) o;
     return Objects.equals(this.streetNumber, address.streetNumber) &&
         Objects.equals(this.streetName, address.streetName) &&
-        equalsNullable(this.unit, address.unit) &&
+            Objects.equals(this.unit, address.unit) &&
         Objects.equals(this.city, address.city) &&
         Objects.equals(this.stateProvince, address.stateProvince) &&
         Objects.equals(this.postalCode, address.postalCode) &&
@@ -210,7 +210,7 @@ public class Address {
 
   @Override
   public int hashCode() {
-    return Objects.hash(streetNumber, streetName, hashCodeNullable(unit), city, stateProvince, postalCode, country);
+    return Objects.hash(streetNumber, streetName, unit, city, stateProvince, postalCode, country);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
