@@ -6,6 +6,7 @@ import com.maple.pro.courier.usermanagementms.core.models.dto.UserUpdate;
 import com.maple.pro.courier.usermanagementms.core.services.interfaces.ICreateUserApplicationService;
 import com.maple.pro.courier.usermanagementms.core.services.interfaces.IDeleteUserApplicationService;
 import com.maple.pro.courier.usermanagementms.core.services.interfaces.IGetUserApplicationService;
+import com.maple.pro.courier.usermanagementms.core.services.interfaces.IGetUsersByFiltersApplicationService;
 import com.maple.pro.courier.usermanagementms.web.controllers.interfaces.IUserController;
 import jakarta.validation.Valid;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,9 @@ public class UserController implements IUserController {
 
     @Autowired
     private IDeleteUserApplicationService deleteUserApplicationService;
+
+    @Autowired
+    private IGetUsersByFiltersApplicationService getUsersByFiltersApplicationService;
     @Override
     public ResponseEntity<UserResponse> createUser(@Valid @RequestBody User user) {
         // Call the create-user application service to handle the business logic
@@ -64,7 +68,9 @@ public class UserController implements IUserController {
 
     @Override
     public ResponseEntity<List<UserResponse>> getUsersByFilters(String mobileNumber, OffsetDateTime createdAt, OffsetDateTime updatedAt, String email) {
-        return null;
+        List<UserResponse> responseList= getUsersByFiltersApplicationService.getUserByFilters(mobileNumber,createdAt, updatedAt, email);
+
+        return new ResponseEntity<>(responseList, HttpStatus.OK);
     }
 
     @Override
