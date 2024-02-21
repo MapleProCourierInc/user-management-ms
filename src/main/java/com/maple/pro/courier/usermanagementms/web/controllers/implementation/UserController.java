@@ -3,10 +3,7 @@ package com.maple.pro.courier.usermanagementms.web.controllers.implementation;
 import com.maple.pro.courier.usermanagementms.core.models.dto.User;
 import com.maple.pro.courier.usermanagementms.core.models.dto.UserResponse;
 import com.maple.pro.courier.usermanagementms.core.models.dto.UserUpdate;
-import com.maple.pro.courier.usermanagementms.core.services.interfaces.ICreateUserApplicationService;
-import com.maple.pro.courier.usermanagementms.core.services.interfaces.IDeleteUserApplicationService;
-import com.maple.pro.courier.usermanagementms.core.services.interfaces.IGetUserApplicationService;
-import com.maple.pro.courier.usermanagementms.core.services.interfaces.IGetUsersByFiltersApplicationService;
+import com.maple.pro.courier.usermanagementms.core.services.interfaces.*;
 import com.maple.pro.courier.usermanagementms.web.controllers.interfaces.IUserController;
 import jakarta.validation.Valid;
 import lombok.NoArgsConstructor;
@@ -38,12 +35,14 @@ public class UserController implements IUserController {
 
     @Autowired
     private IGetUsersByFiltersApplicationService getUsersByFiltersApplicationService;
+
+    @Autowired
+    private IUpdateUserApplicationService updateUserApplicationService;
+
     @Override
     public ResponseEntity<UserResponse> createUser(@Valid @RequestBody User user) {
-        // Call the create-user application service to handle the business logic
         UserResponse response = createUserApplicationService.createUser(user);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
-
     }
 
     @Override
@@ -53,28 +52,25 @@ public class UserController implements IUserController {
         }catch (Exception e){
             return new ResponseEntity<>("Unable to Delete user with id" + id + " StackTrace: " + Arrays.toString(e.getStackTrace()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
         return new ResponseEntity<>("User with User Id : " + id + "deleted Successfully.", HttpStatus.NO_CONTENT);
 
     }
 
     @Override
     public ResponseEntity<UserResponse> getUserById(String id) {
-
         UserResponse response = getUserApplicationService.getUser(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
-
     }
 
     @Override
     public ResponseEntity<List<UserResponse>> getUsersByFilters(String mobileNumber, OffsetDateTime createdAt, OffsetDateTime updatedAt, String email) {
         List<UserResponse> responseList= getUsersByFiltersApplicationService.getUserByFilters(mobileNumber,createdAt, updatedAt, email);
-
         return new ResponseEntity<>(responseList, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<UserResponse> updateUser(String id, UserUpdate userUpdate) {
-        return null;
+        UserResponse  response = updateUserApplicationService.updateUser(id, userUpdate);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

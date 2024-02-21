@@ -2,17 +2,17 @@ package com.maple.pro.courier.usermanagementms.core.models.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.openapitools.jackson.nullable.JsonNullable;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.annotation.Generated;
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+;
 
 /**
  * UserUpdate
@@ -25,7 +25,7 @@ public class UserUpdate {
 
   private String email;
 
-  private JsonNullable<String> passwordHash = JsonNullable.<String>undefined();
+  private String passwordHash;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime createdAt;
@@ -44,24 +44,24 @@ public class UserUpdate {
 
   private String profilePictureUrl;
 
-  private JsonNullable<String> passwordResetToken = JsonNullable.<String>undefined();
+  private String passwordResetToken;
 
-  private JsonNullable<Boolean> emailVerified = JsonNullable.<Boolean>undefined();
+  private Boolean emailVerified;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime lastLogin;
 
-  private JsonNullable<Integer> loginAttempts = JsonNullable.<Integer>undefined();
+  private Integer loginAttempts;
 
-  private JsonNullable<String> role = JsonNullable.<String>undefined();
+  private String role;
 
-  private JsonNullable<Boolean> marketingPreferences = JsonNullable.<Boolean>undefined();
+  private Boolean marketingPreferences;
 
-  private JsonNullable<Object> notificationsEnabled = JsonNullable.<Object>undefined();
+  private Object notificationsEnabled;
 
-  private JsonNullable<Boolean> tosAccepted = JsonNullable.<Boolean>undefined();
+  private Boolean tosAccepted;
 
-  private JsonNullable<Boolean> privacyPolicyAccepted = JsonNullable.<Boolean>undefined();
+  private Boolean privacyPolicyAccepted;
 
   private String locale;
 
@@ -76,7 +76,7 @@ public class UserUpdate {
    */
   public UserUpdate(String email, String passwordHash, String firstName, String lastName) {
     this.email = email;
-    this.passwordHash = JsonNullable.of(passwordHash);
+    this.passwordHash = passwordHash;
     this.firstName = firstName;
     this.lastName = lastName;
   }
@@ -122,7 +122,7 @@ public class UserUpdate {
   }
 
   public UserUpdate passwordHash(String passwordHash) {
-    this.passwordHash = JsonNullable.of(passwordHash);
+    this.passwordHash = passwordHash;
     return this;
   }
 
@@ -133,11 +133,11 @@ public class UserUpdate {
   @NotNull 
   @Schema(name = "passwordHash", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("passwordHash")
-  public JsonNullable<String> getPasswordHash() {
+  public String getPasswordHash() {
     return passwordHash;
   }
 
-  public void setPasswordHash(JsonNullable<String> passwordHash) {
+  public void setPasswordHash(String passwordHash) {
     this.passwordHash = passwordHash;
   }
 
@@ -290,7 +290,7 @@ public class UserUpdate {
   }
 
   public UserUpdate passwordResetToken(String passwordResetToken) {
-    this.passwordResetToken = JsonNullable.of(passwordResetToken);
+    this.passwordResetToken = passwordResetToken;
     return this;
   }
 
@@ -301,16 +301,16 @@ public class UserUpdate {
   
   @Schema(name = "passwordResetToken", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("passwordResetToken")
-  public JsonNullable<String> getPasswordResetToken() {
+  public String getPasswordResetToken() {
     return passwordResetToken;
   }
 
-  public void setPasswordResetToken(JsonNullable<String> passwordResetToken) {
+  public void setPasswordResetToken(String passwordResetToken) {
     this.passwordResetToken = passwordResetToken;
   }
 
   public UserUpdate emailVerified(Boolean emailVerified) {
-    this.emailVerified = JsonNullable.of(emailVerified);
+    this.emailVerified = emailVerified;
     return this;
   }
 
@@ -321,11 +321,11 @@ public class UserUpdate {
   
   @Schema(name = "emailVerified", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("emailVerified")
-  public JsonNullable<Boolean> getEmailVerified() {
+  public Boolean getEmailVerified() {
     return emailVerified;
   }
 
-  public void setEmailVerified(JsonNullable<Boolean> emailVerified) {
+  public void setEmailVerified(Boolean emailVerified) {
     this.emailVerified = emailVerified;
   }
 
@@ -350,7 +350,7 @@ public class UserUpdate {
   }
 
   public UserUpdate loginAttempts(Integer loginAttempts) {
-    this.loginAttempts = JsonNullable.of(loginAttempts);
+    this.loginAttempts = loginAttempts;
     return this;
   }
 
@@ -361,16 +361,16 @@ public class UserUpdate {
   
   @Schema(name = "loginAttempts", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("loginAttempts")
-  public JsonNullable<Integer> getLoginAttempts() {
+  public Integer getLoginAttempts() {
     return loginAttempts;
   }
 
-  public void setLoginAttempts(JsonNullable<Integer> loginAttempts) {
+  public void setLoginAttempts(Integer loginAttempts) {
     this.loginAttempts = loginAttempts;
   }
 
   public UserUpdate role(String role) {
-    this.role = JsonNullable.of(role);
+    this.role = role;
     return this;
   }
 
@@ -381,16 +381,16 @@ public class UserUpdate {
   
   @Schema(name = "role", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("role")
-  public JsonNullable<String> getRole() {
+  public String getRole() {
     return role;
   }
 
-  public void setRole(JsonNullable<String> role) {
+  public void setRole(String role) {
     this.role = role;
   }
 
   public UserUpdate marketingPreferences(Boolean marketingPreferences) {
-    this.marketingPreferences = JsonNullable.of(marketingPreferences);
+    this.marketingPreferences = marketingPreferences;
     return this;
   }
 
@@ -401,16 +401,16 @@ public class UserUpdate {
   
   @Schema(name = "marketingPreferences", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("marketingPreferences")
-  public JsonNullable<Boolean> getMarketingPreferences() {
+  public Boolean getMarketingPreferences() {
     return marketingPreferences;
   }
 
-  public void setMarketingPreferences(JsonNullable<Boolean> marketingPreferences) {
+  public void setMarketingPreferences(Boolean marketingPreferences) {
     this.marketingPreferences = marketingPreferences;
   }
 
   public UserUpdate notificationsEnabled(Object notificationsEnabled) {
-    this.notificationsEnabled = JsonNullable.of(notificationsEnabled);
+    this.notificationsEnabled = notificationsEnabled;
     return this;
   }
 
@@ -421,16 +421,16 @@ public class UserUpdate {
   
   @Schema(name = "notificationsEnabled", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("notificationsEnabled")
-  public JsonNullable<Object> getNotificationsEnabled() {
+  public Object getNotificationsEnabled() {
     return notificationsEnabled;
   }
 
-  public void setNotificationsEnabled(JsonNullable<Object> notificationsEnabled) {
+  public void setNotificationsEnabled(Object notificationsEnabled) {
     this.notificationsEnabled = notificationsEnabled;
   }
 
   public UserUpdate tosAccepted(Boolean tosAccepted) {
-    this.tosAccepted = JsonNullable.of(tosAccepted);
+    this.tosAccepted = tosAccepted;
     return this;
   }
 
@@ -441,16 +441,16 @@ public class UserUpdate {
   
   @Schema(name = "tosAccepted", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("tosAccepted")
-  public JsonNullable<Boolean> getTosAccepted() {
+  public Boolean getTosAccepted() {
     return tosAccepted;
   }
 
-  public void setTosAccepted(JsonNullable<Boolean> tosAccepted) {
+  public void setTosAccepted(Boolean tosAccepted) {
     this.tosAccepted = tosAccepted;
   }
 
   public UserUpdate privacyPolicyAccepted(Boolean privacyPolicyAccepted) {
-    this.privacyPolicyAccepted = JsonNullable.of(privacyPolicyAccepted);
+    this.privacyPolicyAccepted = privacyPolicyAccepted;
     return this;
   }
 
@@ -461,11 +461,11 @@ public class UserUpdate {
   
   @Schema(name = "privacyPolicyAccepted", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("privacyPolicyAccepted")
-  public JsonNullable<Boolean> getPrivacyPolicyAccepted() {
+  public Boolean getPrivacyPolicyAccepted() {
     return privacyPolicyAccepted;
   }
 
-  public void setPrivacyPolicyAccepted(JsonNullable<Boolean> privacyPolicyAccepted) {
+  public void setPrivacyPolicyAccepted(Boolean privacyPolicyAccepted) {
     this.privacyPolicyAccepted = privacyPolicyAccepted;
   }
 
@@ -527,35 +527,19 @@ public class UserUpdate {
         Objects.equals(this.addresses, userUpdate.addresses) &&
         Objects.equals(this.firstName, userUpdate.firstName) &&
         Objects.equals(this.lastName, userUpdate.lastName) &&
-        Objects.equals(this.profilePictureUrl, userUpdate.profilePictureUrl) &&
-        equalsNullable(this.passwordResetToken, userUpdate.passwordResetToken) &&
-        equalsNullable(this.emailVerified, userUpdate.emailVerified) &&
-        Objects.equals(this.lastLogin, userUpdate.lastLogin) &&
-        equalsNullable(this.loginAttempts, userUpdate.loginAttempts) &&
-        equalsNullable(this.role, userUpdate.role) &&
-        equalsNullable(this.marketingPreferences, userUpdate.marketingPreferences) &&
-        equalsNullable(this.notificationsEnabled, userUpdate.notificationsEnabled) &&
-        equalsNullable(this.tosAccepted, userUpdate.tosAccepted) &&
-        equalsNullable(this.privacyPolicyAccepted, userUpdate.privacyPolicyAccepted) &&
+        Objects.equals(this.profilePictureUrl, userUpdate.profilePictureUrl) && Objects.equals(this.passwordResetToken, userUpdate.passwordResetToken) && Objects.equals(this.emailVerified, userUpdate.emailVerified) &&
+        Objects.equals(this.lastLogin, userUpdate.lastLogin) && Objects.equals(this.loginAttempts, userUpdate.loginAttempts) && Objects.equals(this.role, userUpdate.role) && Objects.equals(this.marketingPreferences, userUpdate.marketingPreferences) && Objects.equals(this.notificationsEnabled, userUpdate.notificationsEnabled) && Objects.equals(this.tosAccepted, userUpdate.tosAccepted) && Objects.equals(this.privacyPolicyAccepted, userUpdate.privacyPolicyAccepted) &&
         Objects.equals(this.locale, userUpdate.locale) &&
         Objects.equals(this.timeZone, userUpdate.timeZone);
   }
-
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
-  }
+  
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, email, passwordHash, createdAt, updatedAt, mobileNumber, addresses, firstName, lastName, profilePictureUrl, hashCodeNullable(passwordResetToken), hashCodeNullable(emailVerified), lastLogin, hashCodeNullable(loginAttempts), hashCodeNullable(role), hashCodeNullable(marketingPreferences), hashCodeNullable(notificationsEnabled), hashCodeNullable(tosAccepted), hashCodeNullable(privacyPolicyAccepted), locale, timeZone);
+    return Objects.hash(userId, email, passwordHash, createdAt, updatedAt, mobileNumber, addresses, firstName, lastName, profilePictureUrl, passwordResetToken, emailVerified, lastLogin, loginAttempts, role, marketingPreferences, notificationsEnabled, tosAccepted, privacyPolicyAccepted, locale, timeZone);
   }
 
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
-  }
+
 
   @Override
   public String toString() {

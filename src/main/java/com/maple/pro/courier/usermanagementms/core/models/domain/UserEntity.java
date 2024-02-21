@@ -34,7 +34,7 @@ public class UserEntity {
     @Indexed
     private String mobileNumber;
 
-    private List<Address> addresses;
+    private List<AddressEntity> addressEntities;
 
     private String firstName;
 
