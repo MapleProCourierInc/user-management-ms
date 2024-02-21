@@ -6,18 +6,18 @@ import com.maple.pro.courier.usermanagementms.core.models.dto.UserResponse;
 import com.maple.pro.courier.usermanagementms.core.services.interfaces.ICreateUserApplicationService;
 import com.maple.pro.courier.usermanagementms.integration.persistence.UserRepository;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 
 
 @Service
 @NoArgsConstructor
+@Slf4j
 public class CreateUserApplicationService implements ICreateUserApplicationService {
 
     @Autowired
@@ -28,10 +28,12 @@ public class CreateUserApplicationService implements ICreateUserApplicationServi
 
 
     public UserResponse createUser( User user){
+        log.info("Enter CreateUserApplicationService.createUser");
 
         UserEntity userEntity = mapUsertoUserEntity(user);
         userRepository.save(userEntity);
 
+        log.info("Exit CreateUserApplicationService.createUser");
         return prepareUserResponse(userEntity);
     }
 
