@@ -4,9 +4,12 @@ import com.maple.pro.courier.usermanagementms.core.models.dto.User;
 import com.maple.pro.courier.usermanagementms.core.models.dto.UserResponse;
 import com.maple.pro.courier.usermanagementms.core.models.dto.UserUpdate;
 import com.maple.pro.courier.usermanagementms.core.services.interfaces.ICreateUserApplicationService;
+import com.maple.pro.courier.usermanagementms.core.services.interfaces.IDeleteUserApplicationService;
+import com.maple.pro.courier.usermanagementms.core.services.interfaces.IGetUserApplicationService;
 import com.maple.pro.courier.usermanagementms.web.controllers.interfaces.IUserController;
 import jakarta.validation.Valid;
 import lombok.NoArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.OffsetDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -24,22 +28,38 @@ public class UserController implements IUserController {
 
     @Autowired
     private ICreateUserApplicationService createUserApplicationService;
+
+    @Autowired
+    private IGetUserApplicationService getUserApplicationService;
+
+    @Autowired
+    private IDeleteUserApplicationService deleteUserApplicationService;
     @Override
     public ResponseEntity<UserResponse> createUser(@Valid @RequestBody User user) {
-        // Call the delegate to handle the business logic
+        // Call the create-user application service to handle the business logic
         UserResponse response = createUserApplicationService.createUser(user);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
 
     }
 
     @Override
-    public ResponseEntity<UserResponse> deleteUser(String id) {
-        return null;
+    public ResponseEntity<String> deleteUser(String id) {
+        try{
+            deleteUserApplicationService.deleteUser(id);
+        }catch (Exception e){
+            return new ResponseEntity<>("Unable to Delete user with id" + id + " StackTrace: " + Arrays.toString(e.getStackTrace()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>("User with User Id : " + id + "deleted Successfully.", HttpStatus.NO_CONTENT);
+
     }
 
     @Override
     public ResponseEntity<UserResponse> getUserById(String id) {
-        return null;
+
+        UserResponse response = getUserApplicationService.getUser(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
 
     @Override

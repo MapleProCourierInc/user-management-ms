@@ -2,18 +2,18 @@ package com.maple.pro.courier.usermanagementms.core.models.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.annotation.Generated;
 import javax.validation.Valid;
-import javax.validation.constraints.*;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
  * UserResponse
  */
-
+@Builder
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-02-03T23:51:21.190824-04:00[America/Halifax]")
 public class UserResponse {
 

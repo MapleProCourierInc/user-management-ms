@@ -8,7 +8,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
 import java.util.List;
 
 @Document(value = "user")
@@ -27,10 +26,10 @@ public class UserEntity {
     private String passwordHash;
 
     @Indexed
-    private Date createdAt;
+    private String createdAt;
 
     @Indexed
-    private Date updatedAt;
+    private String updatedAt;
 
     @Indexed
     private String mobileNumber;
@@ -47,7 +46,7 @@ public class UserEntity {
 
     private Boolean emailVerified;
 
-    private Date lastLogin;
+    private String lastLogin;
 
     private Integer loginAttempts;
 

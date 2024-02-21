@@ -6,5 +6,5 @@ import jakarta.validation.Valid;
 
 public interface ICreateUserApplicationService {
 
-    public UserResponse createUser(User user);
+    UserResponse createUser(User user);
 }

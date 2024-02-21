@@ -70,7 +70,7 @@ public interface IUserController {
             value = "/delete-user/{id}"
     )
 
-    ResponseEntity<UserResponse> deleteUser(@Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") String id);
+    ResponseEntity<String> deleteUser(@Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") String id);
 
 
     /**

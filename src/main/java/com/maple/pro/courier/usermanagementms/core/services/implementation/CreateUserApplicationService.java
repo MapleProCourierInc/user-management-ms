@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
@@ -35,12 +36,10 @@ public class CreateUserApplicationService implements ICreateUserApplicationServi
     }
 
     private UserResponse prepareUserResponse(UserEntity userEntity) {
-        UserResponse userResponse = new UserResponse();
+        UserResponse userResponse = UserResponse.builder().build();
         userResponse.setUserId(userEntity.getUserId());
-        //Will create a bug where canada's multiple timezones will cause this to fail
-        if (userEntity.getCreatedAt() != null) {
-            userResponse.setCreatedAt(userEntity.getCreatedAt().toInstant().atZone(ZoneId.systemDefault()).toOffsetDateTime());
-        }
+        userResponse.setCreatedAt(OffsetDateTime.parse(userEntity.getCreatedAt()));
+        userResponse.setUpdatedAt(OffsetDateTime.parse(userEntity.getUpdatedAt()));
         userResponse.setEmail(userEntity.getEmail());
         userResponse.setFirstName(userEntity.getFirstName());
         userResponse.setLastName(userEntity.getLastName());
@@ -51,11 +50,9 @@ public class CreateUserApplicationService implements ICreateUserApplicationServi
 
     private UserEntity mapUsertoUserEntity(User user) {
         UserEntity userEntity = new UserEntity();
-        if (user.getCreatedAt() != null) {
-            userEntity.setCreatedAt(Date.from(user.getCreatedAt().toInstant()));
-        }
+        userEntity.setCreatedAt(user.getCreatedAt().toString());
         userEntity.setEmail(user.getEmail());
-        userEntity.setUpdatedAt(userEntity.getCreatedAt());
+        userEntity.setUpdatedAt(user.getUpdatedAt().toString());
         userEntity.setFirstName(user.getFirstName());
         userEntity.setLastName(user.getLastName());
         userEntity.setMobileNumber(user.getMobileNumber());
